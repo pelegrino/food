@@ -71,6 +71,7 @@ div#msgDeErro
 	border-radius: 10px;
 	color: #ffffff;
 	height: 20px;
+	padding: 10px;
 }
 
 img#imgIconeCarrinho
@@ -104,7 +105,7 @@ textarea
 	height: 100px;	
 }
 
-input[type=text], [type=password], [type=tel], select
+input[type=text], [type=password], [type=date], [type=tel], select
 {
 	font-size: 16px;
 	width: 140px;
@@ -132,4 +133,98 @@ input[type=submit]:hover
 {
 	background-color: #a28d63;
 	border-color: #6d6149;
+}
+
+table
+{
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #e9e9e7;
+	font-size: 14px;
+	border-spacing: 1px;
+}
+
+tr:nth-child(even) 
+{
+	background-color: #c4c4c4;	
+	border-radius: 4px;
+}
+
+th
+{
+	background-color: #6d6149;
+	color: #ffffff;
+	text-transform: uppercase;
+	padding: 7px;
+	border-radius: 4px;
+}
+
+td
+{
+	padding: 4px;
+	border-radius: 4px;
+}
+
+div#divCategoriaComidaOpcao
+{
+	float: left;
+	height: 130px;
+}
+
+div#divCategoriasComidasGeral
+{
+	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+}
+
+img#imgCategoriaComidas
+{
+	height: 40px;
+}
+
+fieldset#fieldsetFiltros
+{
+	border-width: 3px;
+}
+
+input#inputSelecionado
+{
+	background-color: #a28d63;
+	border-color: #6d6149;
+}
+
+img#imgRestauranteOpcao
+{
+	height: 130px;
+}
+
+span#restauranteOpcaoTitulo
+{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+div#divRestauranteOpcao
+{
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#divmsgsucesso
+{
+	background: #044907;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+	color: #ffffff;
+	height: 20px;
+	padding: 10px;
+}
+
+.inputError
+{
+	border: 2px solid #f42316;
 }
