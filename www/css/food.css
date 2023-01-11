@@ -70,13 +70,66 @@ div#msgDeErro
 	margin-right: auto;
 	border-radius: 10px;
 	color: #ffffff;
+	height: 20px;
 }
 
+img#imgIconeCarrinho
+{
+	width: 30px;
+}
 
+div#divUsuarioLogado
+{
+	line-height: 40px;
+}
 
+fieldset 
+{
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	border-width: 1px;
+}
 
+input, textarea, select 
+{
+	border: 2px solid #6d6149;
+	height: 35px;
+	margin-bottom: 5px;
+}
 
+textarea 
+{
+	width: 300px;
+	height: 100px;	
+}
 
+input[type=text], [type=password], [type=tel], select
+{
+	font-size: 16px;
+	width: 140px;
+	padding-left: 5px;
+	border-radius: 15px;
+}
 
+input[type=button],
+input[type=submit]
+{
+	border-radius: 15px;
+	background-color: #7c6f54;
+	border-bottom: 3px solid #594f3c;
+	border-top: 1px solid #594f3c;
+	border-left: 1px solid #594f3c;
+	border-right: 1px solid #594f3c;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 5px 8px;
+	color: #ffffff;
+}
 
-
+input[type=button]:hover,
+input[type=submit]:hover
+{
+	background-color: #a28d63;
+	border-color: #6d6149;
+}
