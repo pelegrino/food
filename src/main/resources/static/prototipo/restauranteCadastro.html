@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Food</title>
+<link rel="stylesheet" type="text/css" href="css/food.css"/>
+</head>
+
+<body>
+
+	<header>
+		<div id="divLogotipoSistema">
+		<span id="spanAuxiliarDeAlinhamentoVertical"></span>
+			<a href="">
+			<img src="images/food.png" id="imgLogotipoSistema">
+			</a>
+		</div>
+		
+		<div id="divUsuarioLogado">Olá Nome do Usuário!<br/>
+		</div>
+		
+	</header>
+	<br />
+	<br />
+	<!-- Cabeçalho - Fim -->
+	
+	<div>
+		<h1>Cadastro de Restaurante</h1>
+		
+		<form method="post" action="">
+			<fieldset>
+				<label for="nome" >Nome: </label><br/>
+				<input type="text" id="nome" name="nome" placeholder="Nome"/><br/><br/>
+				<div id="msgDeErro">Mensagem de Erro</div>			
+				
+				<label for="cpf">CNPJ: </label><br/>
+				<input type="text" id="cnpj" name="cpf" placeholder="cnpj"/><br/><br/>
+				
+				<label for="email">E-mail: </label><br/>
+				<input type="text" id="email" name="email" placeholder="E-mail"/><br/><br/>
+				
+				<label for="telefone">Telefone: </label><br/>
+				<input type="tel" id="telefone" name="telefone" placeholder="telefone"/><br/><br/>
+				
+				<label for="cep">CEP: </label><br/>
+				<input type="text" id="cep" name="cep" placeholder="CEP"/><br/><br/>
+				
+				<label for="categoria">Categoria de Comida: </label><br/>
+				<select name="categoria" id="categoria">
+					<option>Salada</option>
+					<option>Churrasco</option>
+					<option>Pizza</option>
+					<option>Hamburgguer</option>
+				</select><br/><br/>
+				
+				<label for="logotipo">Logotipo</label><br/>
+				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo"/><br/><br/>	
+				
+				<label for="senha">Senha: </label><br/>
+				<input type="password" id="senha" name="senha" placeholder="Senha"/><br/><br/>
+				
+				<div>
+					Aqui vai uma mensagem de erro!
+				</div><br/><br/>
+				
+				<input type="button" value="Cadastrar"/>
+				
+			</fieldset>
+		</form>	
+		<br/>
+		<input type="button" value="Voltar"/>
+		
+	
+	</div>
+	
+	<!-- Rodapé - Início -->
+</body>
+
+</html>
