@@ -1,49 +1,32 @@
 <!DOCTYPE html>
 <html
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" >
-
-<head>
-<meta charset="UTF-8">
-<title>Food</title>
-<link rel="stylesheet" type="text/css" th:href="@{css/food.css}"/>
-</head>
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}">
 
 <body>
-
-	<header>
-		<div id="divLogotipoSistema">
-		<span id="spanAuxiliarDeAlinhamentoVertical"></span>
-			<a href="">
-			<img th:src="@{/images/food.png}" id="imgLogotipoSistema">
-			</a>
+	<div layout:fragment="content">
+		<div>
+			<img th:src="@{/images/user.png}" id="imgIconeUsuario">
+			<h1>Autenticação</h1>
+			<form method="post" action="">
+				<fieldset>
+					<input type="text" name="email" placeholder="E-mail"> 
+					<input type="password" name="senha" placeholder="Senha"> 
+					<input type="button" value="Confirmar">
+				</fieldset>
+			</form>
+			<br>
+			<div id="msgDeErro">
+				Aqui vai um exemplo de mensagem de erro
+			</div>
+			<br>
+			<input type="button" value="Criar Conta Usuário">
+			<br/>
+			<br/>
+			<input type="button" value="Criar Conta Restaurante">
 		</div>
-	</header>
-	<br />
-	<br />
-	<!-- Cabeçalho - Fim -->
-	<div>
-		<img th:src="@{/images/user.png}" id="imgIconeUsuario">
-		<h1>Autenticação</h1>
-		<form method="post" action="">
-			<fieldset>
-				<input type="text" name="email" placeholder="E-mail"> 
-				<input type="password" name="senha" placeholder="Senha"> 
-				<input type="button" value="Confirmar">
-			</fieldset>
-		</form>
-		<br>
-		<div id="msgDeErro">
-			Aqui vai um exemplo de mensagem de erro
-		</div>
-		<br>
-		<input type="button" value="Criar Conta Usuário">
-		<br/>
-		<br/>
-		<input type="button" value="Criar Conta Restaurante">
-				
 	</div>
-	<!-- Rodapé - Início -->
 </body>
 
 </html>

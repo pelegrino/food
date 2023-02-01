@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+<meta charset="UTF-8">
+<title>Food</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/food.css}"/>
+</head>
+
+<body>
+
+	<header>
+		<div id="divLogotipoSistema">
+		<span id="spanAuxiliarDeAlinhamentoVertical"></span>
+			<a th:href="@{/}">
+			<img th:src="@{/images/food.png}" id="imgLogotipoSistema"/>
+			</a>
+		</div>
+	</header>
+	<br />
+	<br />
+	<!-- Cabeçalho - Fim -->
+	
+	<!-- Conteúdo -->
+	<div layout:fragment="content"></div>
+
+	<!-- Rodapé - Início -->
+</body>
+
+</html>
