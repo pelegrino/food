@@ -21,7 +21,9 @@
 				Aqui vai um exemplo de mensagem de erro
 			</div>
 			<br>
-			<input type="button" value="Criar Conta Usuário">
+			<form method="get" th:action="@{/public/cliente/new}" >
+				<input type="submit" value="Criar Conta Usuário" />
+			</form>
 			<br/>
 			<br/>
 			<input type="button" value="Criar Conta Restaurante">
