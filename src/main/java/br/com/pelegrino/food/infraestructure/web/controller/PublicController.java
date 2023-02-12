@@ -22,7 +22,7 @@ public class PublicController {
 	@GetMapping("/cliente/new")
 	public String newCliente(Model model) {
 		model.addAttribute("cliente", new Cliente());
-		ControllerHelper.setEditMode(model, false);
+		ControllerHelper.setEditMode(model, true);
 		return "clienteCadastro";
 	}
 	
