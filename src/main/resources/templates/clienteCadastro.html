@@ -10,8 +10,8 @@
 		<div>
 			<h1>Cadastro de Cliente</h1>
 			
-			<div id="divmsgsucesso">
-				Mensagem de Sucesso!
+			<div id="divmsgsucesso" th:if="${msg != null}">
+				<span th:text="${msg}"></span>
 			</div>
 			<br/>
 			
