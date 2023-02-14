@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.pelegrino.food.application.ClienteService;
+import br.com.pelegrino.food.application.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import jakarta.validation.Valid;
 
@@ -34,10 +35,14 @@ public class PublicController {
 			Model model) {
 		
 		if (!errors.hasErrors()) {
+			try {
 			clienteService.saveCliente(cliente);
 			model.addAttribute("msg", "Cliente salvo com sucesso!");
-		} 
+		} catch (ValidationException e) {
+			errors.rejectValue("email", null, e.getMessage());
+		}
 		
+		}
 		ControllerHelper.setEditMode(model, false);
 		return "clienteCadastro";
 	}
