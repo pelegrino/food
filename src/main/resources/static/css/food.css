@@ -70,7 +70,7 @@ div#msgDeErro
 	margin-right: auto;
 	border-radius: 10px;
 	color: #ffffff;
-	height: 20px;
+	height: auto;
 	padding: 10px;
 }
 
