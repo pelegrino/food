@@ -35,7 +35,7 @@ public class PublicController {
 		
 		if (!errors.hasErrors()) {
 			clienteService.saveCliente(cliente);
-			model.addAttribute("msg", "Cliente salvo com sucesso");
+			model.addAttribute("msg", "Cliente salvo com sucesso!");
 		} 
 		
 		ControllerHelper.setEditMode(model, false);

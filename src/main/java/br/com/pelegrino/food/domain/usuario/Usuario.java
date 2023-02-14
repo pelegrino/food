@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
 	private String senha;
 	
 	@NotBlank(message = "O telefone não pode ser vazio")
-	@Pattern(regexp = "[0-9]{10, 11}", message = "O telefone possui formato inválido")
+	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inválido")
 	@Size(max = 80, message = "O nome é muito grande")
 	@Column(length = 11, nullable = false)
 	private String telefone;
