@@ -1,28 +1,11 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-<meta charset="UTF-8">
-<title>Food</title>
-<link rel="stylesheet" type="text/css" href="css/food.css"/>
-</head>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}">
 
 <body>
-
-	<header>
-		<div id="divLogotipoSistema">
-		<span id="spanAuxiliarDeAlinhamentoVertical"></span>
-			<a href="">
-			<img src="images/food.png" id="imgLogotipoSistema">
-			</a>
-		</div>
-		
-		<div id="divUsuarioLogado">Olá Nome do Usuário!<br/>
-		</div>
-		
-	</header>
-	<br />
-	<br />
+	<div layout:fragment="content">
 	<!-- Cabeçalho - Fim -->
 	
 	<div>
@@ -71,9 +54,8 @@
 		<br/>
 		<input type="button" value="Voltar"/>
 		
-	
 	</div>
-	
+	</div>
 	<!-- Rodapé - Início -->
 </body>
 

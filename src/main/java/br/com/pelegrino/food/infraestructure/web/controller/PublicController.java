@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.pelegrino.food.application.ClienteService;
 import br.com.pelegrino.food.application.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
+import br.com.pelegrino.food.domain.restaurante.Restaurante;
 import jakarta.validation.Valid;
 
 
@@ -27,6 +28,13 @@ public class PublicController {
 		model.addAttribute("cliente", new Cliente());
 		ControllerHelper.setEditMode(model, false);
 		return "clienteCadastro";
+	}
+	
+	@GetMapping("/restaurante/new")
+	public String newRestaurante(Model model) {
+		model.addAttribute("restaurante", new Restaurante());
+		ControllerHelper.setEditMode(model, false);
+		return "restauranteCadastro";
 	}
 	
 	@PostMapping(path = "/cliente/save")
