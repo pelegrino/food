@@ -1,10 +1,15 @@
 package br.com.pelegrino.food.domain.restaurante;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import br.com.pelegrino.food.domain.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -42,4 +47,11 @@ public class Restaurante extends Usuario {
 	@Max(120)
 	private Integer tempoEntrega;
 	
+	@ManyToMany
+	@JoinTable(
+			name = "restaurante_has_categoria",
+			joinColumns = @JoinColumn(name = "restaurante_id"),
+			inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
+			)
+	private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 }
