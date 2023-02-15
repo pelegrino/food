@@ -2,6 +2,7 @@ package br.com.pelegrino.food.domain.usuario;
 
 import java.io.Serializable;
 
+import br.com.pelegrino.food.util.StringUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,5 +46,9 @@ public class Usuario implements Serializable {
 	@Size(max = 80, message = "O nome é muito grande")
 	@Column(length = 11, nullable = false)
 	private String telefone;
+	
+	public void encryptPassword() {
+		this.senha = StringUtils.encrypt(this.senha);
+	}
 
 }
