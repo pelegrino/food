@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.com.pelegrino.food.domain.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +40,9 @@ public class Restaurante extends Usuario {
 	@Size(max = 80)
 	private String logotipo;
 	
+	
+	private transient MultipartFile logotipoFile;
+	
 	@NotNull(message = "A taxa de entrega não pode ser vazia")
 	@Min(0)
 	@Max(99)
@@ -57,4 +62,14 @@ public class Restaurante extends Usuario {
 	@Size(min = 1, message = "O restaurante precisa ter ao menos uma categoria")
 	@ToString.Exclude
 	private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
+	
+	public void setLogotipoFileName() {
+		if (getId() == null) {
+			throw new IllegalStateException("É preciso primeiro gravar o registro");
+		}
+		//TODO: Trocar forma de ler a extensão
+		this.logotipo = String.format("%04d-logo.%s", getId(), ".png");
+		
+	}
+	
 }

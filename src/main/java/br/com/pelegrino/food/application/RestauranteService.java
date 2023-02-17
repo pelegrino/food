@@ -15,7 +15,18 @@ public class RestauranteService {
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
 		
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
-			throw new ValidationException("O e-mail está replicado");
+			throw new ValidationException("O e-mail está duplicado.");
+		}
+		
+		if (restaurante.getId() != null) {
+			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow();
+			restaurante.setSenha(restauranteDB.getSenha());
+			
+		} else {
+			restaurante.encryptPassword();
+			restaurante = restauranteRepository.save(restaurante);
+			restaurante.setLogotipoFileName();
+			//TODO: Upload!
 		}
 		
 		

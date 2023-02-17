@@ -11,7 +11,13 @@
 	<div>
 		<h1>Cadastro de Restaurante</h1>
 		
-		<form method="post" th:object="${restaurante}" th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}">
+		<div id="divmsgsucesso" th:if="${msg != null}">
+				<span th:text="${msg}"></span>
+		</div>
+			<br/>
+		
+		<form method="post" th:object="${restaurante}" th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" 
+				enctype="multipart/form-data">
 			<fieldset>
 				<input type="hidden" th:field="*{id}" />
 				
@@ -43,15 +49,6 @@
 						<span th:errors="*{telefone}" ></span>
 				</div><br />	
 				
-				<!-- 
-				<label for="cep">CEP: </label><br/>
-				<input type="text" id="cep" name="cep" placeholder="CEP" th:field="*{cep}"
-						th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''" /><br/><br/>
-				<div id="msgDeErro" th:if="${#fields.hasErrors('cep')}">
-						<span th:errors="*{cep}" ></span>
-				</div><br />
-				-->
-				
 				<label for="nome" >Taxa de Entrega: </label><br/>
 				<input type="text" id="taxaEntrega" name="taxaEntrega" placeholder="taxaEntrega" th:field="*{taxaEntrega}"
 						th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''" /><br/><br/>
@@ -77,7 +74,7 @@
 				<br/><br/>
 				
 				<label for="logotipo">Logotipo</label><br/>
-				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo"/><br/><br/>	
+				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo" th:field="*{logotipoFile}"/><br/><br/>	
 				
 				<label for="senha">Senha: </label><br/>
 				<input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{senha}"
@@ -86,12 +83,11 @@
 						<span th:errors="*{senha}" ></span>
 				</div><br />	
 
-				<div>
-					Aqui vai uma mensagem de erro!
-				</div><br/><br/>
-				
-				<input type="button" value="Cadastrar"/>
-				
+					<input type="hidden" name="senha" value="*" th:if="${editMode}" />
+				<br/>
+				<br/>
+					<input type="submit" value="Cadastrar"/>
+								
 			</fieldset>
 		</form>	
 		<br/>

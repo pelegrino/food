@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.pelegrino.food.application.ClienteService;
+import br.com.pelegrino.food.application.RestauranteService;
 import br.com.pelegrino.food.application.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
@@ -23,6 +24,9 @@ public class PublicController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private RestauranteService restauranteService;
 	
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
@@ -58,6 +62,24 @@ public class PublicController {
 		}
 		ControllerHelper.setEditMode(model, false);
 		return "clienteCadastro";
+	}
+	
+	@PostMapping(path = "/restaurante/save")
+	public String saveRestaurante(@ModelAttribute("restaurante") @Valid Restaurante restaurante,
+			Errors errors,
+			Model model) {
+		
+		if (!errors.hasErrors()) {
+			try {
+			restauranteService.saveRestaurante(restaurante);
+			model.addAttribute("msg", "Restaurante salvo com sucesso!");
+		} catch (ValidationException e) {
+			errors.rejectValue("email", null, e.getMessage());
+		}
+		
+		}
+		ControllerHelper.setEditMode(model, false);
+		return "restauranteCadastro";
 	}
 
 }
