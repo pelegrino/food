@@ -34,7 +34,7 @@ public class CategoriaRestaurante implements Serializable {
 	
 	@NotNull
 	@Size(max = 50)
-	private String image;
+	private String imagem;
 	
 	@ManyToMany(mappedBy = "categorias")
 	private Set<Restaurante> restaurantes = new HashSet<>(0);

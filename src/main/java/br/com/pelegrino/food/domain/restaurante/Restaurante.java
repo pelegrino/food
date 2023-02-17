@@ -20,6 +20,7 @@ import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Getter
@@ -53,5 +54,7 @@ public class Restaurante extends Usuario {
 			joinColumns = @JoinColumn(name = "restaurante_id"),
 			inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
 			)
+	@Size(min = 1, message = "O restaurante precisa ter ao menos uma categoria")
+	@ToString.Exclude
 	private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 }
