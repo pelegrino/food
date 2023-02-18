@@ -66,7 +66,7 @@
 				<label for="categoria">Categoria de Comida: </label><br/>
 				<select name="categoria" id="categoria" multiple="multiple" th:field="*{categorias}" 
 					style="height: 90px;" th:classappend="${#fields.hasErrors('categorias')} ? 'inputError' : ''" >
-					<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}" >Salada</option>
+					<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}" ></option>
 				</select>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('categorias')}">
 						<span th:errors="*{categorias}" ></span>
@@ -95,7 +95,7 @@
 			</fieldset>
 		</form>	
 		<br/>
-		<input type="button" value="Voltar"/>
+		<input type="button" value="Voltar" th:onclick="'location.href=\''+ @{/restaurante/home} + '\';'" />
 		
 	</div>
 	</div>

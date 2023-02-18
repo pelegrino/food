@@ -2,6 +2,7 @@ package br.com.pelegrino.food.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
 import br.com.pelegrino.food.domain.restaurante.RestauranteRepository;
@@ -15,6 +16,7 @@ public class RestauranteService {
 	@Autowired
 	private ImageService imageService;
 	
+	@Transactional
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
 		
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {

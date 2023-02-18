@@ -2,9 +2,12 @@ package br.com.pelegrino.food.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.cliente.ClienteRepository;
+import br.com.pelegrino.food.domain.restaurante.Restaurante;
+import br.com.pelegrino.food.domain.restaurante.RestauranteRepository;
 
 @Service
 public class ClienteService {
@@ -12,6 +15,10 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
+	
+	@Transactional
 	public void saveCliente(Cliente cliente) throws ValidationException {
 		
 		if (!validateEmail(cliente.getEmail(), cliente.getId())) {
@@ -31,9 +38,15 @@ public class ClienteService {
 	
 	private boolean validateEmail(String email, Integer id) {
 		
+		Restaurante restaurante = restauranteRepository.findByEmail(email);
+		
+		if (restaurante != null) {
+			return false;
+		}
+		
 		Cliente cliente = clienteRepository.findByEmail(email);
 		
-		if(cliente != null) {
+		if (cliente != null) {
 			if(id == null) {
 				return false;
 			} 
