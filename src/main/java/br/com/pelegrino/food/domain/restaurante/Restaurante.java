@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.pelegrino.food.domain.usuario.Usuario;
+import br.com.pelegrino.food.infraestructure.web.validator.UploadConstraint;
 import br.com.pelegrino.food.util.FileType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,7 +42,7 @@ public class Restaurante extends Usuario {
 	@Size(max = 80)
 	private String logotipo;
 	
-	
+	@UploadConstraint(accepFileTypes = {FileType.PNG, FileType.JPG}, message = "O arquivo não é válido")
 	private transient MultipartFile logotipoFile;
 	
 	@NotNull(message = "A taxa de entrega não pode ser vazia")

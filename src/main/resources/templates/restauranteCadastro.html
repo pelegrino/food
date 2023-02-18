@@ -74,7 +74,11 @@
 				<br/><br/>
 				
 				<label for="logotipo">Logotipo</label><br/>
-				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo" th:field="*{logotipoFile}"/><br/><br/>	
+				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo" th:field="*{logotipoFile}"
+						th:classappend="${#fields.hasErrors('logotipoFile')} ? 'inputError' : ''" /><br/><br/>
+				<div id="msgDeErro" th:if="${#fields.hasErrors('logotipoFile')}">
+						<span th:errors="*{logotipoFile}" ></span>
+				</div><br />
 				
 				<label for="senha">Senha: </label><br/>
 				<input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{senha}"
