@@ -1,4 +1,4 @@
-package br.com.pelegrino.food.application;
+package br.com.pelegrino.food.application.service;
 
 @SuppressWarnings("serial")
 public class ApplicationServiceException extends RuntimeException {

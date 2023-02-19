@@ -1,4 +1,4 @@
-package br.com.pelegrino.food.application;
+package br.com.pelegrino.food.application.service;
 
 import java.io.IOException;
 

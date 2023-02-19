@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.pelegrino.food.application.ClienteService;
-import br.com.pelegrino.food.application.RestauranteService;
-import br.com.pelegrino.food.application.ValidationException;
+import br.com.pelegrino.food.application.service.ClienteService;
+import br.com.pelegrino.food.application.service.RestauranteService;
+import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
