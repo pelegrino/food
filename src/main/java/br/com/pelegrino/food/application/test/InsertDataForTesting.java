@@ -29,6 +29,7 @@ public class InsertDataForTesting {
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 
+	@SuppressWarnings("unused")
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		clientes();
