@@ -9,16 +9,16 @@
 		<div>
 			<img th:src="@{/images/user.png}" id="imgIconeUsuario">
 			<h1>Autenticação</h1>
-			<form method="post" action="">
+			<form method="post" th:action="@{/login}">
 				<fieldset>
-					<input type="text" name="email" placeholder="E-mail"> 
-					<input type="password" name="senha" placeholder="Senha"> 
-					<input type="button" value="Confirmar">
+					<input type="text" name="username" placeholder="E-mail"> 
+					<input type="password" name="password" placeholder="Senha"> 
+					<input type="submit" value="Entrar">
 				</fieldset>
 			</form>
 			<br>
-			<div id="msgDeErro">
-				Aqui vai um exemplo de mensagem de erro
+			<div id="msgDeErro" th:if="${msg =! null}">
+				<span th:text="${msg}></span>
 			</div>
 			<br>
 			<form method="get" th:action="@{/public/cliente/new}" >
