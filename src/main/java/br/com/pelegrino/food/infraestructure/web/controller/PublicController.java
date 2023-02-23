@@ -15,7 +15,7 @@ import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 
 @Controller

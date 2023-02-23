@@ -17,8 +17,8 @@
 				</fieldset>
 			</form>
 			<br>
-			<div id="msgDeErro" th:if="${msg =! null}">
-				<span th:text="${msg}></span>
+			<div id="msgDeErro" th:if="${msg != null}">
+				<span th:text="${msg}"></span>
 			</div>
 			<br>
 			<form method="get" th:action="@{/public/cliente/new}" >

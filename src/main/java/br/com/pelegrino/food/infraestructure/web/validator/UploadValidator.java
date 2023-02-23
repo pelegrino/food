@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.pelegrino.food.util.FileType;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 public class UploadValidator implements ConstraintValidator<UploadConstraint, MultipartFile> {
 
