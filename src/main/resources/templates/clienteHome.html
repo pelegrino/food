@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}">
+
+<body>
+	<div layout:fragment="content">
+	
+		<div>
+			<h1>É hora de rangar!</h1>
+			
+			<form method="post" action="">
+			<fieldset id="fieldsetFiltros">
+				<input type="text" name="busca" placeholder="Buscar por..."/>
+				<input type="button" value="Buscar"/>
+			</fieldset>
+			</form>	
+		</div><br/>
+	
+		<div id="divCategoriasComidasGeral">
+			<div id="divCategoriaComidaOpcao">
+				<a href="#">
+				<img src="images/churrasco.png" id="imgCategoriaComidas"><br/>
+				<span>Churrasco</span>
+				</a>
+			</div>
+		
+			<div id="divCategoriaComidaOpcao">
+				<a href="#">
+				<img src="images/lanche.png" id="imgCategoriaComidas"><br/>
+				<span>Lanche</span>
+				</a>
+			</div>
+			
+			<div id="divCategoriaComidaOpcao">
+				<a href="#">
+				<img src="images/pizza.png" id="imgCategoriaComidas"><br/>
+				<span>Pizza</span>
+				</a>
+			</div>
+			
+			
+			<div id="divCategoriaComidaOpcao">
+				<a href="#">
+				<img src="images/salada.png" id="imgCategoriaComidas"><br/>
+				<span>Salada</span>
+				</a>
+			</div>
+			
+			
+			<div id="divCategoriaComidaOpcao">
+				<a href="#">
+				<img src="images/doce.png" id="imgCategoriaComidas"><br/>
+				<span>Sobremesa</span>
+				</a>
+			</div>
+		</div>
+		
+		<div>
+			<h1>Últimos Pedidos</h1>
+			<input type="button" value="#15225 Food Lanche"/><br/>
+			<input type="button" value="#15214 Food Pizza"/><br/>
+			<input type="button" value="#15012 Food Salada"/><br/>
+		</div>
+		
+		<div>
+			<h1>Conta</h1>
+			<input type="button" value="Meus Dados" th:onclick="'location.href=\''+@{/cliente/edit}+'\';'"/><br/>
+			<input type="button" value="Sair" th:onclick="'location.href=\''+@{/logout}+'\';'"/><br/>
+		</div>
+	</div>
+	
+</body>
+
+</html>
