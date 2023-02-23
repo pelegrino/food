@@ -6,7 +6,7 @@ plugins {
 
 group = 'br.com.pelegrino.food'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '13'
 
 configurations {
 	compileOnly {
