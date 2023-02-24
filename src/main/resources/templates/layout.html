@@ -15,9 +15,14 @@
 	<header>
 		<div id="divLogotipoSistema">
 		<span id="spanAuxiliarDeAlinhamentoVertical"></span>
-			<a th:href="@{/}">
+			<a th:href="${link} == null ? @{/} : ${link}">
 			<img th:src="@{/images/food.png}" id="imgLogotipoSistema"/>
 			</a>
+		</div>
+		
+		<div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
+			<br />
+			<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
 		</div>
 	</header>
 	<br />
