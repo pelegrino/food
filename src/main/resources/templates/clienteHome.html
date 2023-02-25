@@ -10,10 +10,10 @@
 		<div>
 			<h1>É hora de rangar!</h1>
 			
-			<form method="post" action="">
+			<form method="get" th:object="${searchFilter}" th:action="@{/cliente/search}">
 			<fieldset id="fieldsetFiltros">
-				<input type="text" name="busca" placeholder="Buscar por..."/>
-				<input type="button" value="Buscar"/>
+				<input type="text" th:field="*{texto}" placeholder="Buscar por..."/>
+				<input type="submit" value="Buscar"/>
 			</fieldset>
 			</form>	
 		</div><br/>

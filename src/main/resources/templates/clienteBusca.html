@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
+
+<body>
+	<div layout:fragment="content">
+	
+		<div>
+			<h1>É hora de rangar!</h1>
+			
+			<form method="post" action="">
+			<fieldset id="fieldsetFiltros">
+				<input type="text" name="busca" placeholder="Buscar por..."/>
+				<input type="button" value="Buscar"/>
+			</fieldset>
+			</form>	
+		</div><br/>
+		
+		<div id="divCategoriasComidasGeral">
+			<div id="divCategoriaComidaOpcao" th:each="categoria : ${categorias}">
+				<a href="#">
+				<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComidas"><br/>
+				<span th:text="${categoria.nome}"></span>
+				</a>
+			</div>
+		</div>
+		
+			<div>
+				<h1>Resultados</h1>
+				<fieldset>
+					<legend>Filtros</legend>	
+					<input type="button" value="Entrega grátis"/><br/>
+					<input type="button" value="Maior Preço"/> <input type="button" value="Menor Preço" id="inputSelecionado"/><br/>
+					<input type="button" value="Maior Taxa"/> <input type="button" value="Menor Taxa"/><br/>
+					<input type="button" value="Maior Tempo"/> <input type="button" value="Menor Tempo"/><br/>
+				</fieldset>
+			</div>
+		
+			<div id="divRestauranteGeral">
+			
+				<br />
+				<div id="divRestauranteOpcao" th:each="restaurante : ${restaurantes}">
+					<a href="#">
+						<img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"><br/>
+						<span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br/>
+						<span>Categoria de Comida</span><br/>
+						<span th:text="'Tempo médio de entrega: ' + ${restaurante.tempoEntrega} + 'm'">Tempo médio de entrega: 40 minutos</span><br/>
+						<span>Taxa de Entrega: R$ 5,00</span><br/>				
+					</a>
+					<br /><br />
+				</div>
+				
+			</div>
+		
+			<input type="button" value="Voltar" />
+		</div>
+	
+	<!-- Rodapé - Início -->
+</body>
+
+</html>

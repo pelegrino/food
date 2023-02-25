@@ -104,7 +104,7 @@ public class InsertDataForTesting {
 		r.setTelefone("9999999000");
 		r.getCategorias().add(categoriaPizza);
 		r.getCategorias().add(categoriaSobremesa);
-		r.setLogotipo("0003-logo.png");
+		r.setLogotipo("0004-logo.png");
 		restauranteRepository.save(r);
 		restaurantes.add(r);
 		
@@ -119,7 +119,7 @@ public class InsertDataForTesting {
 		r.setTelefone("9999990000");
 		r.getCategorias().add(categoriaJapones);
 		r.getCategorias().add(categoriaSobremesa);
-		r.setLogotipo("0003-logo.png");
+		r.setLogotipo("0005-logo.png");
 		restauranteRepository.save(r);
 		restaurantes.add(r);
 		

@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.pelegrino.food.application.service.ClienteService;
+import br.com.pelegrino.food.application.service.RestauranteService;
 import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.cliente.ClienteRepository;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestaurante;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
+import br.com.pelegrino.food.domain.restaurante.Restaurante;
+import br.com.pelegrino.food.domain.restaurante.SearchFilter;
 import br.com.pelegrino.food.util.SecurityUtils;
 
 @Controller
@@ -33,15 +36,19 @@ public class ClienteController {
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
 	@Autowired
+	private RestauranteService restauranteService;
+	
+	@Autowired
 	private ClienteService clienteService;
 	
 	@GetMapping(path = "/home")
 	public String home(Model model) {
 		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
 		model.addAttribute("categorias", categorias);
+		model.addAttribute("searchFilter", new SearchFilter());
 		return "clienteHome";
 	}
-	
+		
 	@GetMapping(path = "/edit")
 	public String edit(Model model) {
 		Integer clienteId = SecurityUtils.loggedCliente().getId();
@@ -68,6 +75,16 @@ public class ClienteController {
 		}
 		ControllerHelper.setEditMode(model, true);
 		return "clienteCadastro";
+	}
+	
+	@GetMapping(path = "/search")
+	public String search(
+			@ModelAttribute("searchFilter") SearchFilter filter,
+			Model model) {
+		List<Restaurante> restaurantes = restauranteService.search(filter);
+		model.addAttribute("restaurantes", restaurantes);
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
 		
+		return "clienteBusca";
 	}
 }

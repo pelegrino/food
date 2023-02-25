@@ -1,11 +1,14 @@
 package br.com.pelegrino.food.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
 import br.com.pelegrino.food.domain.restaurante.RestauranteRepository;
+import br.com.pelegrino.food.domain.restaurante.SearchFilter;
 
 @Service
 public class RestauranteService {
@@ -53,6 +56,11 @@ public class RestauranteService {
 		}
 		
 		return true;
+	}
+	
+	public List<Restaurante> search(SearchFilter filter) {
+		//TODO Considerar critérios de filtragem
+		return restauranteRepository.findAll();
 	}
 
 }
