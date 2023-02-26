@@ -29,7 +29,7 @@
 				</div><br />		
 				
 				<label for="cpf">CNPJ: </label><br/>
-				<input type="text" id="cnpj" name="cnpj" placeholder="cnpj" th:field="*{cnpj}"
+				<input type="text" id="cnpj" name="cnpj" placeholder="CNPJ" th:field="*{cnpj}"
 						th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('cnpj')}">
 						<span th:errors="*{cnpj}" ></span>
@@ -43,21 +43,21 @@
 				</div><br />	
 				
 				<label for="telefone">Telefone: </label><br/>
-				<input type="tel" id="telefone" name="telefone" placeholder="telefone" th:field="*{telefone}"
+				<input type="tel" id="telefone" name="telefone" placeholder="Telefone" th:field="*{telefone}"
 						th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('telefone')}">
 						<span th:errors="*{telefone}" ></span>
 				</div><br />	
 				
 				<label for="nome" >Taxa de Entrega: </label><br/>
-				<input type="text" id="taxaEntrega" name="taxaEntrega" placeholder="taxaEntrega" th:field="*{taxaEntrega}"
+				<input type="text" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de Entrega" th:field="*{taxaEntrega}"
 						th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('taxaEntrega')}">
 						<span th:errors="*{taxaEntrega}" ></span>
 				</div><br />	
 				
 				<label for="nome" >Tempo de Entrega: </label><br/>
-				<input type="text" id="tempoEntrega" name="tempoEntrega" placeholder="tempoEntrega" th:field="*{tempoEntrega}"
+				<input type="text" id="tempoEntrega" name="tempoEntrega" placeholder="Tempo de Entrega" th:field="*{tempoEntrega}"
 						th:classappend="${#fields.hasErrors('tempoEntrega')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('tempoEntrega')}">
 						<span th:errors="*{tempoEntrega}" ></span>
@@ -74,7 +74,7 @@
 				<br/><br/>
 				
 				<label for="logotipo">Logotipo</label><br/>
-				<input type="file" id="logotipo" name="logotipo" placeholder="Logotipo" th:field="*{logotipoFile}"
+				<input type="file" id="logotipo" name="logotipo" th:field="*{logotipoFile}"
 						th:classappend="${#fields.hasErrors('logotipoFile')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('logotipoFile')}">
 						<span th:errors="*{logotipoFile}" ></span>
