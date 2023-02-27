@@ -2,6 +2,7 @@ package br.com.pelegrino.food.domain.restaurante;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -9,8 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.pelegrino.food.domain.usuario.Usuario;
 import br.com.pelegrino.food.infraestructure.web.validator.UploadConstraint;
 import br.com.pelegrino.food.util.FileType;
+import br.com.pelegrino.food.util.StringUtils;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -56,7 +60,7 @@ public class Restaurante extends Usuario {
 	@Max(120)
 	private Integer tempoEntrega;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "restaurante_has_categoria",
 			joinColumns = @JoinColumn(name = "restaurante_id"),
@@ -75,6 +79,17 @@ public class Restaurante extends Usuario {
 		}
 		this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
 		
+	}
+	
+	public String getCategoriasAsText() {
+		Set<String> strings = new LinkedHashSet<>();
+		
+		for(CategoriaRestaurante categoria : categorias) {
+			strings.add(categoria.getNome());
+			
+		}
+		
+		return StringUtils.concatenate(strings);
 	}
 	
 }
