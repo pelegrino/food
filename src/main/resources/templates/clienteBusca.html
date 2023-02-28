@@ -6,28 +6,30 @@
 
 <body>
 	<div layout:fragment="content">
-	
-		<div>
-			<h1>É hora de rangar!</h1>
+
+		<form id="form" method="get" th:object="${searchFilter}" th:action="@{/cliente/search}">
+			<input id="searchType" type="hidden" th:field="*{searchType}" />
+			<input id="categoriaId" type="hidden" th:field="*{categoriaId}" />
 			
-			<form method="post" action="">
-			<fieldset id="fieldsetFiltros">
-				<input type="text" name="busca" placeholder="Buscar por..."/>
-				<input type="button" value="Buscar"/>
-			</fieldset>
-			</form>	
-		</div><br /><br /><br />
+			<div>
+				<h1>É hora de rangar!</h1>
+				<fieldset id="fieldsetFiltros">
+					<input type="text" th:field="*{texto}" placeholder="Buscar por..."/>
+					<input type="button" value="Buscar" onclick="searchRest(null)"/>
+				</fieldset>
+			</div><br /><br /><br />
 		
-		<center>
-		<div id="divCategoriasComidasGeral">
-			<div id="divCategoriaComidaOpcao" th:each="categoria : ${categorias}">
-				<a href="#">
-				<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComidas"><br/>
-				<span th:text="${categoria.nome}"></span>
-				</a>
+			<center>
+			<div id="divCategoriasComidasGeral">
+				<div id="divCategoriaComidaOpcao" th:each="categoria : ${categorias}">
+					<a href="#" th:onclick="'searchRest(' + ${categoria.id} + ');'">
+					<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComidas"><br/>
+					<span th:text="${categoria.nome}"></span>
+					</a>
+				</div>
 			</div>
-		</div>
-		</center>
+			</center>
+		</form>	
 		
 			<div>
 				<h1>Resultados</h1>
@@ -55,8 +57,15 @@
 				</div>
 				
 			</div>
+			
+			<div th:if="${restaurantes.size() == 0}">
+				<span>Nenhum restaurante encontrado...</span>
+			</div>
 		
-			<input type="button" value="Voltar" />
+			<br />
+			<br />
+		
+			<input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'" />
 		</div>
 	
 	<!-- Rodapé - Início -->

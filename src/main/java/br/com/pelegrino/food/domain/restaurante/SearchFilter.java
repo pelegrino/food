@@ -4,7 +4,22 @@ import lombok.Data;
 
 @Data
 public class SearchFilter {
-
-	public String texto;
 	
+	public enum SearchType {
+		Texto, Categoria
+	}
+
+	private String texto;
+	private SearchType searchType;
+	private Integer categoriaId;
+	
+	
+	public void processFilter() {
+		if (searchType == SearchType.Texto) {
+			categoriaId = null;
+			
+		} else if (searchType == SearchType.Categoria) {
+			texto = null;
+		}
+	}
 }
