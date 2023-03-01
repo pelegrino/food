@@ -23,6 +23,7 @@ import br.com.pelegrino.food.domain.cliente.ClienteRepository;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestaurante;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
+import br.com.pelegrino.food.domain.restaurante.RestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.SearchFilter;
 import br.com.pelegrino.food.util.SecurityUtils;
 
@@ -41,6 +42,9 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
 	
 	@GetMapping(path = "/home")
 	public String home(Model model) {
@@ -91,7 +95,19 @@ public class ClienteController {
 		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
 		
 		model.addAttribute("searchFilter", filter);
+		model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
 		
 		return "clienteBusca";
+	}
+	
+	@GetMapping(path = "/restaurante")
+	public String viewRestaurante(@RequestParam("restauranteId") Integer restauranteId,
+			Model model) {
+		
+		Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
+		model.addAttribute("restaurante", restaurante);
+		model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
+		
+		return "clienteRestaurante";
 	}
 }

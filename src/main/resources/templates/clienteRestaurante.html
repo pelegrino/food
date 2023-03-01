@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
+
+<body>
+	<div layout:fragment="content">
+		<div>
+			<div>
+				<img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"><br/>
+				<span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br/>
+				<span id="restauranteOpcaoCategoria" th:text="${restaurante.categoriasAsText}"></span><br/>
+				<span id="restauranteOpcaoTempo" th:text="'Tempo médio de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + 'm'" ></span><br/>
+				<span id="restauranteOpcaoTaxa" th:text="'Taxa de Entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span><br/>				
+			</div>
+			<br/><br/>
+		
+			<div>
+			<h1>Opções</h1>	
+			<fieldset>
+				<legend>Filtros</legend>
+				<input type="button" value="Promoções" />
+				<input type="button" value="Saladas" />
+				<input type="button" value="Bebidas" />
+				<input type="button" value="Pizzas" />
+			</fieldset>
+			<br/>
+			</div>
+			
+			<div>
+				<h1>Destaques</h1>
+			
+				<div>
+					<div>
+						<img src="images/burguer.jpg" id="imgClienteRestaurante"><br/>
+						<span id="spanclientePedido">Burguer Max</span><br/>
+						<span>Hamburguer artesanal, com salada, bacon, ovos</span><br/>
+						<span>R$ 50,00</span><br/>
+						<form method="post" action="">
+							<label for="quantidade">Quantidade</label><br/>
+							<select id="quantidade" name="quantidade">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select><br/><br/>
+							Observações
+							<br/>
+							<textarea></textarea>
+							<br/>
+							<input type="button" value="Adicionar ao Carrinho"/>
+						</form>
+					</div>
+					
+					<br/><br/>
+					
+					<div>
+						<img src="images/pizza.jpg" id="imgClienteRestaurante"><br/>
+						<span id="spanclientePedido">Pizza de Pepperoni</span><br/>
+						<span>Massa fina, pepperoni, mussarela, pimenta e molho de tomate</span><br/>
+						<span>R$ 50,00</span><br/>
+						<form method="post" action="">
+							<label for="quantidade">Quantidade</label><br/>
+							<select id="quantidade" name="quantidade">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select><br/><br/>
+							Observações
+							<br/>
+							<textarea></textarea>
+							<br/>
+							<input type="button" value="Adicionar ao Carrinho"/>
+						</form>
+					</div>
+				
+				</div>
+			</div>
+			<br/>
+			<input type="button" value="Voltar" />
+		</div>	
+	
+</body>
+
+</html>
