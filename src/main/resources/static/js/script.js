@@ -29,3 +29,9 @@ function setCmd(cmd) {
 	document.getElementById("cmd").value = cmd;
 	document.getElementById("form").submit();
 }
+
+
+function filterCardapio(categoria) {
+	document.getElementById("categoria").value = categoria;
+	document.getElementById("filterForm").submit();
+}
