@@ -194,10 +194,12 @@ input#inputSelecionado
 	border-color: #6d6149;
 }
 
+
 img#imgRestauranteOpcao
 {
 	height: 130px;
 }
+
 
 span#restauranteOpcaoTitulo, span#spanclientePedido
 {
