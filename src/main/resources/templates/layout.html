@@ -23,7 +23,13 @@
 		<div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
 			<br />
 			<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
-		</div>
+			
+			<div th:if="${session.carrinho != null}" style="display: inline;">
+				<br/>
+				<a th:href="@{/cliente/carrinho/visualizar}"><img th:src="@{/images/carrinho.png}" id="imgCarrinho" /></a>
+			</div>
+			
+		</di>
 	</header>
 	<br />
 	<br />
