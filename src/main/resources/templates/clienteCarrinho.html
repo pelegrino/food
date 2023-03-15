@@ -41,15 +41,16 @@
 				<span id="restauranteOpcaoTotal" th:text="${#numbers.formatCurrency(carrinho.getPrecoTotal(true))}"></span>
 			</div><br/><br/>
 			
+			<form method="post" th:action="@{/cliente/pagamento/pagar}" >
 			<div>
-				<span>Cartão de Crédito</span><br/>
-				<input type="text" name="Cartão" />
+				<span id="restauranteOpcaoTitulo">Cartão de Crédito</span><br/>
+				<input name="numCartao" type="text" id="inputLargo" onkeypress="return isNumberKey(event)" />
 			</div>
 
 			<div>
-				<input type="button" value="Enviar" /><br/>
-				<input type="button" value="Voltar"/>
+				<input type="submit" value="Enviar Pedido" /><br/>
 			</div>	
+			</form>
 		</div>
 	</div>
 </body>
