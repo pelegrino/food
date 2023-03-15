@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,6 +44,18 @@ public class Pedido implements Serializable {
 		int ordem;
 		String descricao;
 		boolean ultimo;
+		
+		public String getDescricao() {
+			return descricao;
+		}
+		
+		public int getOrdem() {
+			return ordem;
+		}
+		
+		public boolean isUltimo() {
+			return ultimo;
+		}
 	}
 
 	@Id
@@ -73,6 +86,6 @@ public class Pedido implements Serializable {
 	@NotNull
 	private BigDecimal total;
 	
-	@OneToMany(mappedBy = "id.pedido")
+	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER)
 	private Set<ItemPedido> itensPedido;
 }
