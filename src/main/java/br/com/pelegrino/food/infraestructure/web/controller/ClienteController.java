@@ -20,6 +20,8 @@ import br.com.pelegrino.food.application.service.RestauranteService;
 import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.cliente.ClienteRepository;
+import br.com.pelegrino.food.domain.pedido.Pedido;
+import br.com.pelegrino.food.domain.pedido.PedidoRepository;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestaurante;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
@@ -43,6 +45,9 @@ public class ClienteController {
 	private RestauranteService restauranteService;
 	
 	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
 	private ClienteService clienteService;
 	
 	@Autowired
@@ -56,6 +61,10 @@ public class ClienteController {
 		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("searchFilter", new SearchFilter());
+		
+		List<Pedido> pedidos = pedidoRepository.listaPedidosByCliente(SecurityUtils.loggedCliente().getId());
+		model.addAttribute("pedidos", pedidos);
+		
 		return "clienteHome";
 	}
 		
