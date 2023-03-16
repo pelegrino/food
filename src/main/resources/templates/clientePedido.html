@@ -9,7 +9,7 @@
 	
 	<div>
 		<h1>Seu Pedido</h1>
-		<input type="button" value="Refazer Pedido"/>
+		<input type="button" value="Refazer Pedido" th:onclick="'location.href=\'' + @{/cliente/carrinho/refazerCarrinho} + '?pedidoId=' + ${pedido.id} + '\';'" >
 		<br/>
 	</div>
 	<br/>
