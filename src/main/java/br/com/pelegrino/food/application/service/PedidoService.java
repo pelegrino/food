@@ -1,10 +1,19 @@
 package br.com.pelegrino.food.application.service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
+import br.com.pelegrino.food.domain.pagamento.DadosCartao;
+import br.com.pelegrino.food.domain.pagamento.StatusPagamento;
 import br.com.pelegrino.food.domain.pedido.Carrinho;
 import br.com.pelegrino.food.domain.pedido.ItemPedido;
 import br.com.pelegrino.food.domain.pedido.ItemPedidoPK;
@@ -23,7 +32,15 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	public Pedido criarEPagar(Carrinho carrinho, String numCartao) {
+	@Value("${food.pay.url}")
+	private String payUrl;
+	
+	@Value("${food.pay.token}")
+	private String token;
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(rollbackFor = PagamentoException.class)
+	public Pedido criarEPagar(Carrinho carrinho, String numCartao) throws PagamentoException {
 		
 		Pedido pedido = new Pedido();
 		pedido.setData(LocalDateTime.now());
@@ -43,8 +60,32 @@ public class PedidoService {
 			itemPedidoRepository.save(itemPedido);
 		}
 		
-		//TODO: Pagamento
+		DadosCartao dadosCartao = new DadosCartao();
+		dadosCartao.setNumCartao(numCartao);
 		
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		headers.add("Token", token);
+		
+		HttpEntity<DadosCartao> requEntity = new HttpEntity<>(dadosCartao, headers);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		Map<String, String> response;
+		
+		try {
+			response = restTemplate.postForObject(payUrl, requEntity, Map.class);
+		
+		} catch (Exception e) {
+			throw new PagamentoException("Erro no servidor de pagamento.");
+			
+		}
+			
+		StatusPagamento statusPagamento = StatusPagamento.valueOf(response.get("status"));
+			
+			if(statusPagamento != StatusPagamento.Autorizado) {
+				throw new PagamentoException();
+			}
+			
 		return pedido;
 	}
 
