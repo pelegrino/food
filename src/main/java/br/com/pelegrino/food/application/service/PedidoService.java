@@ -66,14 +66,14 @@ public class PedidoService {
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.add("Token", token);
 		
-		HttpEntity<DadosCartao> requEntity = new HttpEntity<>(dadosCartao, headers);
+		HttpEntity<DadosCartao> requestEntity = new HttpEntity<>(dadosCartao, headers);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
 		Map<String, String> response;
 		
 		try {
-			response = restTemplate.postForObject(payUrl, requEntity, Map.class);
+			response = restTemplate.postForObject(payUrl, requestEntity	, Map.class);
 		
 		} catch (Exception e) {
 			throw new PagamentoException("Erro no servidor de pagamento.");
@@ -83,7 +83,7 @@ public class PedidoService {
 		StatusPagamento statusPagamento = StatusPagamento.valueOf(response.get("status"));
 			
 			if(statusPagamento != StatusPagamento.Autorizado) {
-				throw new PagamentoException();
+				throw new PagamentoException(statusPagamento.getDescricao());
 			}
 			
 		return pedido;
