@@ -13,10 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import br.com.pelegrino.food.domain.cliente.Cliente;
+import br.com.pelegrino.food.domain.pagamento.Pagamento;
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -85,6 +87,9 @@ public class Pedido implements Serializable {
 	
 	@NotNull
 	private BigDecimal total;
+	
+	@OneToOne(mappedBy = "pedido")
+	private Pagamento pagamento;
 	
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER)
 	private Set<ItemPedido> itensPedido;

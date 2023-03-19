@@ -13,6 +13,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.pelegrino.food.domain.pagamento.DadosCartao;
+import br.com.pelegrino.food.domain.pagamento.Pagamento;
+import br.com.pelegrino.food.domain.pagamento.PagamentoRepository;
 import br.com.pelegrino.food.domain.pagamento.StatusPagamento;
 import br.com.pelegrino.food.domain.pedido.Carrinho;
 import br.com.pelegrino.food.domain.pedido.ItemPedido;
@@ -31,6 +33,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	@Value("${food.pay.url}")
 	private String payUrl;
@@ -85,6 +90,13 @@ public class PedidoService {
 			if(statusPagamento != StatusPagamento.Autorizado) {
 				throw new PagamentoException(statusPagamento.getDescricao());
 			}
+			
+		Pagamento pagamento = new Pagamento();
+		pagamento.setData(LocalDateTime.now());
+		pagamento.setPedido(pedido);
+		pagamento.definirNumeroEBandeira(numCartao);
+		pagamentoRepository.save(pagamento);
+		
 			
 		return pedido;
 	}
