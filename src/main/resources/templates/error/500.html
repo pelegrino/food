@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
+
+<body>
+	<div layout:fragment="content">
+		
+		<div id="imgDeErro">
+			<img th:src="@{/images/error.png}" style="width: 200px;" />
+		</div><br/><br/>
+		
+		<div id="msgDeErro">Ocorreu um erro no servidor</div>
+		
+	</div>
+</body>
+</html>	
