@@ -73,24 +73,28 @@
 				</div><br />
 				<br/><br/>
 				
+				<div th:if="${!editMode}">
 				<label for="logotipo">Logotipo</label><br/>
 				<input type="file" id="logotipo" name="logotipo" th:field="*{logotipoFile}"
 						th:classappend="${#fields.hasErrors('logotipoFile')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('logotipoFile')}">
 						<span th:errors="*{logotipoFile}" ></span>
 				</div><br />
+				</div>
 				
+				<div th:if="${!editMode}">
 				<label for="senha">Senha: </label><br/>
 				<input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{senha}"
 						th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''" /><br/><br/>
 				<div id="msgDeErro" th:if="${#fields.hasErrors('senha')}">
 						<span th:errors="*{senha}" ></span>
-				</div><br />	
+				</div><br />
+				</div>
 
 					<input type="hidden" name="senha" value="*" th:if="${editMode}" />
 				<br/>
 				<br/>
-					<input type="submit" value="Cadastrar"/>
+					<input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'"/>
 								
 			</fieldset>
 		</form>	
