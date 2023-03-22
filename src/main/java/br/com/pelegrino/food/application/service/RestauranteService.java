@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
+import br.com.pelegrino.food.domain.restaurante.ItemCardapioRepository;
 import br.com.pelegrino.food.domain.restaurante.Restaurante;
 import br.com.pelegrino.food.domain.restaurante.RestauranteComparator;
 import br.com.pelegrino.food.domain.restaurante.RestauranteRepository;
@@ -22,6 +24,9 @@ public class RestauranteService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private ItemCardapioRepository itemCardapioRepository;
 	
 	@Transactional
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
@@ -94,6 +99,13 @@ public class RestauranteService {
 		restaurantes.sort(comparator);
 		
 		return restaurantes;
+	}
+	
+	@Transactional
+	public void saveItemCardapio(ItemCardapio itemCardapio) {
+		itemCardapio = itemCardapioRepository.save(itemCardapio);
+		itemCardapio.setImagemFileName();
+		imageService.uploadComida(itemCardapio.getImagemFile(), itemCardapio.getImagem());
 	}
 
 }

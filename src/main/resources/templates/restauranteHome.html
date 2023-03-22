@@ -10,8 +10,7 @@
 	<div>
 		<h1>Configurações</h1>
 		<input type="button" value="Dados Básicos" th:onclick="'location.href=\'' + @{/restaurante/edit} + '\';'"/><br/>
-		<input type="button" value="Categorias de Comidas"/><br/>
-		<input type="button" value="Comidas"/><br/>
+		<input type="button" value="Comidas" th:onclick="'location.href=\'' + @{/restaurante/comidas} + '\';'"/><br/>
 		<input type="button" value="Relatório de Pedidos"/><br/>
 		<input type="button" value="Relatório de Itens"/><br/>		
 		<input type="button" value="Sair" th:onclick="'location.href=\'' + @{/logout} + '\';'"/><br/>
