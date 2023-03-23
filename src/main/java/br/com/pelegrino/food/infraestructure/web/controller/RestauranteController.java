@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.pelegrino.food.application.service.RestauranteService;
 import br.com.pelegrino.food.application.service.ValidationException;
+import br.com.pelegrino.food.domain.pedido.Pedido;
+import br.com.pelegrino.food.domain.pedido.PedidoRepository;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapioRepository;
@@ -38,16 +40,24 @@ public class RestauranteController {
 	
 	@Autowired
 	private ItemCardapioRepository itemCardapioRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
+	
 	@GetMapping(path = "/home")
-	public String home() {
+	public String home(Model model) {
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		List<Pedido> pedidos = pedidoRepository.findByRestaurante_IdOrderByDataDesc(restauranteId);
+		model.addAttribute("pedidos", pedidos);
+		
 		return "restauranteHome";
 	}
 	
 	@GetMapping(path = "/edit")
 	public String edit(Model model) {
-		Integer RestauranteId = SecurityUtils.loggedRestaurante().getId();
-		Restaurante restaurante = restauranteRepository.findById(RestauranteId).orElseThrow();
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
 		model.addAttribute("restaurante", restaurante);
 		ControllerHelper.setEditMode(model, true);
 		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
@@ -75,11 +85,11 @@ public class RestauranteController {
 	
 	@GetMapping(path = "/comidas")
 	public String viewComidas(Model model) {
-		Integer RestauranteId = SecurityUtils.loggedRestaurante().getId();
-		Restaurante restaurante = restauranteRepository.findById(RestauranteId).orElseThrow();
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
 		model.addAttribute("restaurante", restaurante);
 		
-		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(RestauranteId);
+		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
 		
 		model.addAttribute("itensCardapio", itensCardapio);
 		model.addAttribute("itemCardapio", new ItemCardapio());
@@ -101,11 +111,11 @@ public class RestauranteController {
 			Model model) {
 		
 		if (errors.hasErrors()) {
-			Integer RestauranteId = SecurityUtils.loggedRestaurante().getId();
-			Restaurante restaurante = restauranteRepository.findById(RestauranteId).orElseThrow();
+			Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+			Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
 			model.addAttribute("restaurante", restaurante);
 			
-			List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(RestauranteId);
+			List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
 			model.addAttribute("itensCardapio", itensCardapio);
 			
 			return "restauranteComidas";

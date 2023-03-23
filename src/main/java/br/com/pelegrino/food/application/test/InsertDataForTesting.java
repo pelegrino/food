@@ -1,6 +1,7 @@
 package br.com.pelegrino.food.application.test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import br.com.pelegrino.food.domain.cliente.Cliente;
 import br.com.pelegrino.food.domain.cliente.ClienteRepository;
+import br.com.pelegrino.food.domain.pedido.Pedido;
+import br.com.pelegrino.food.domain.pedido.Pedido.Status;
+import br.com.pelegrino.food.domain.pedido.PedidoRepository;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestaurante;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
@@ -33,13 +37,28 @@ public class InsertDataForTesting {
 	
 	@Autowired
 	private ItemCardapioRepository itemCardapioRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		clientes();
+		Cliente[] clientes = clientes();
 		Restaurante[] restaurantes = restaurantes();
 		itensCardapio(restaurantes);
+		
+		Pedido p = new Pedido();
+		p.setData(LocalDateTime.now());
+		p.setCliente(clientes[0]);
+		p.setRestaurante(restaurantes[0]);
+		p.setStatus(Status.Producao);
+		p.setSubtotal(BigDecimal.valueOf(10));
+		p.setTaxaEntrega(BigDecimal.valueOf(2));
+		p.setTotal(BigDecimal.valueOf(12.0));
+		pedidoRepository.save(p);
 	}
+	
 	
 	private Restaurante[] restaurantes() {
 		List<Restaurante> restaurantes = new ArrayList<>();
@@ -137,6 +156,7 @@ public class InsertDataForTesting {
 		c.setCep("00000000");
 		c.setCpf("00000000000");
 		c.setTelefone("0000000000");
+		clientes.add(c);
 		clienteRepository.save(c);
 		
 		
@@ -147,6 +167,7 @@ public class InsertDataForTesting {
 		c.setCep("10000000");
 		c.setCpf("10000000000");
 		c.setTelefone("1000000000");
+		clientes.add(c);
 		clienteRepository.save(c);
 		
 		Cliente[] array = new Cliente[clientes.size()];

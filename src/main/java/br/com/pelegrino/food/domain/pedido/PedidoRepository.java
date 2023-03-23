@@ -12,4 +12,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
 	//Forma simplificada abaixo
 	//public List<Pedido> findByCliente_Id(Integer clienteId);
+	
+	public List<Pedido> findByRestaurante_IdOrderByDataDesc(Integer restauranteId);
 }
