@@ -124,4 +124,33 @@ public class RestauranteController {
 		restauranteService.saveItemCardapio(itemCardapio);
 		return "redirect:/restaurante/comidas";
 	}
+	
+	@GetMapping(path = "/pedido")
+	public String viewPedido(
+			@RequestParam("pedidoId") Integer pedidoId,
+			Model model) {
+		
+		Pedido pedido = pedidoRepository.findById(pedidoId).orElseThrow();
+		model.addAttribute("pedido", pedido);
+		
+		return "restaurantePedido";
+	}
+	
+	@PostMapping(path = "/pedido/proximoStatus")
+	public String proximoStatus(
+			@RequestParam("pedidoId") Integer pedidoId, 
+			Model model) {
+		
+		Pedido pedido = pedidoRepository.findById(pedidoId).orElseThrow();
+		pedido.definirProximoStatus();
+		pedidoRepository.save(pedido);
+		
+		
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("msg", "Status alterado com sucesso");
+		
+		return "restaurantePedido";
+	}
+	
+	
 }

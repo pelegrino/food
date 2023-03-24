@@ -33,9 +33,9 @@ import lombok.Setter;
 public class Pedido implements Serializable {
 	
 	public enum Status {
-		Producao(1, "Em produção.", false),
-		Entrega(2, "Saiu para entrega.", false),
-		Concluido(3, "Entregue.", true);
+		Producao(1, "Em produção", false),
+		Entrega(2, "Saiu para entrega", false),
+		Concluido(3, "Entregue", true);
 		
 		Status (int ordem, String descricao, boolean ultimo) {
 			this.ordem = ordem;
@@ -57,6 +57,16 @@ public class Pedido implements Serializable {
 		
 		public boolean isUltimo() {
 			return ultimo;
+		}
+	
+		public static Status fromOrdem(int ordem) {
+			for (Status status : Status.values()) {
+				if (status.getOrdem() == ordem) {
+					return status;
+				}
+			}
+			
+			return null;
 		}
 	}
 
@@ -97,4 +107,15 @@ public class Pedido implements Serializable {
 	public String getFormattedId() {
 		return String.format("#%05d", id);
 	}
+	
+	public void definirProximoStatus() {
+		int ordem = status.getOrdem();
+		
+		Status newStatus = Status.fromOrdem(ordem + 1);
+		
+		if (newStatus != null) {
+			this.status = newStatus;
+		}
+	}
+	
 }

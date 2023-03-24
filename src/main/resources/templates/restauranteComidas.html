@@ -20,7 +20,7 @@
 
 		<span th:if="${itensCardapio.size() == 0}">Não existem comidas cadastradas.</span>
 
-		<div id="msgDeSucesso" th:if="@{msg != null}">
+		<div id="msgDeSucesso" th:if="S{msg != null}">
 			<span th:text="${msg}"></span><br />
 		</div><br />
 

@@ -20,7 +20,7 @@
 		<h1>Pedidos em andamento</h1>
 		<div th:each="pedido : ${pedidos}"  >
 			<input type="button" th:value="${pedido.formattedId}" 
-				th:onclick="'location.href=\'' + @{/restaurante/pedido} + '?pedidoId' + ${pedido.id} + '\';'" /><br/>
+				th:onclick="'location.href=\'' + @{/restaurante/pedido} + '?pedidoId=' + ${pedido.id} + '\';'" /><br/>
 		</div>
 	</div>
 	
