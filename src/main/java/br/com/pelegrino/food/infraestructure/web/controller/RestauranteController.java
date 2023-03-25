@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.pelegrino.food.application.service.RelatorioService;
 import br.com.pelegrino.food.application.service.RestauranteService;
 import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.pedido.Pedido;
 import br.com.pelegrino.food.domain.pedido.PedidoRepository;
+import br.com.pelegrino.food.domain.pedido.RelatorioPedidoFilter;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapioRepository;
@@ -31,6 +33,9 @@ public class RestauranteController {
 	
 	@Autowired
 	private RestauranteService restauranteService;
+	
+	@Autowired
+	private RelatorioService relatorioService;
 	
 	@Autowired
 	private RestauranteRepository restauranteRepository;
@@ -152,5 +157,17 @@ public class RestauranteController {
 		return "restaurantePedido";
 	}
 	
-	
+	@GetMapping(path = "/relatorio/pedidos")
+	public String relatorioPedidos(
+			@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
+			Model model) {
+		
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		List<Pedido> pedidos = relatorioService.listPedidos(restauranteId, filter);
+		model.addAttribute("pedidos", pedidos);
+		
+		model.addAttribute("filter", filter);
+		
+		return "restauranteRelatorioPedidos";
+	}
 }

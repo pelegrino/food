@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
+	layout:decorate="~{layout}" th:with="link=@{/restaurante/home}">
+
+<body>
+	<div layout:fragment="content">
+		
+	<div>
+		<h1>Relatório de Itens</h1>
+		
+		<form method="get" th:object="${filter}" th:action="@{/restaurante/relatorio/pedidos}" >
+			<fieldset id="fieldsetFiltros">
+				<legend>Filtros</legend>
+				<label for="numero">Item: </label><br/>
+				<input type="text" id="numero" th:field="*{pedidoId}"/><br/><br/>
+			
+				<label for="inicio">Início: </label><br/>
+				<input type="date" id="inicio" th:field="*{dataInicial}"/><br/><br/>
+			
+				<label for="fim">Fim: </label><br/>
+				<input type="date" id="fim" th:field="*{dataFinal}"/><br/><br/>
+				
+				<input type="submit" value="Buscar" /><br/>
+			</fieldset>
+		</form>
+	</div><br/><br/>
+	
+	<div th:if="${pedidos.size() > 0}">
+		<table>
+			<tr>
+				<th>Pedido</th>
+				<th>Nome</th>
+				<th>Endereço</th>
+				<th>Valor</th>
+			</tr>
+			
+			<tr th:each="pedido : ${pedidos}">
+				<td><input type="submit" th:value="${pedido.formattedId}"/></td>
+				<td><span th:text="${pedido.cliente.nome}"></span></td>
+				<td><span th:text="${pedido.cliente.formattedCep}"></span></td>
+				<td><span th:text="${#numbers.formatCurrency(pedido.total)}"></span></td>
+			</tr>
+		</table>
+	</div>
+	
+	<span th:if="${pedidos.size() == 0}">Nenhum pedido encontrado.</span>
+	<br/><br/>
+	
+	<br/>
+	<input type="submit" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\';'" />
+	
+	</div>
+	<!-- Rodapé - Início -->
+</body>
+
+</html>
