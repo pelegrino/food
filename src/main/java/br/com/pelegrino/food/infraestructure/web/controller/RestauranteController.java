@@ -19,6 +19,8 @@ import br.com.pelegrino.food.application.service.RestauranteService;
 import br.com.pelegrino.food.application.service.ValidationException;
 import br.com.pelegrino.food.domain.pedido.Pedido;
 import br.com.pelegrino.food.domain.pedido.PedidoRepository;
+import br.com.pelegrino.food.domain.pedido.RelatorioItemFaturamento;
+import br.com.pelegrino.food.domain.pedido.RelatorioItemFilter;
 import br.com.pelegrino.food.domain.pedido.RelatorioPedidoFilter;
 import br.com.pelegrino.food.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.pelegrino.food.domain.restaurante.ItemCardapio;
@@ -170,4 +172,21 @@ public class RestauranteController {
 		
 		return "restauranteRelatorioPedidos";
 	}
+	
+	@GetMapping(path = "/relatorio/itens")
+	public String relatorioItens(
+			@ModelAttribute("relatorioItemFilter") RelatorioItemFilter filter,
+			Model model) {
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
+		model.addAttribute("itensCardapio", itensCardapio);
+		
+		List<RelatorioItemFaturamento> itensCalculados = relatorioService.calcularFaturamentoItens(restauranteId, filter);
+		model.addAttribute("itensCalculados", itensCalculados);
+		
+		model.addAttribute("relatorioItemFilter", filter);
+			
+		return "restauranteRelatorioItens";
+	}
+	
 }
